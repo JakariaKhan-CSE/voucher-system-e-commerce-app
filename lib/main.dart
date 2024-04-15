@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_e_commerce/business%20logic/all%20logic%20here.dart';
-import 'package:flutter_e_commerce/ui/login_Screen.dart';
 import 'package:flutter_e_commerce/ui/registration_screen.dart';
 import 'package:flutter_e_commerce/ui/splash_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

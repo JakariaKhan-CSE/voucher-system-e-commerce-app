@@ -18,11 +18,11 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
-  // final _businessLogic = Provider.of<BusinessLogic>(context,listen: true);
+  // final _businessLogic = Provider.of<BusinessLogic>(context,listen: true); // aita aikhane kaj korbe na
 
   @override
   Widget build(BuildContext context) {
-    final _LogLogic = Provider.of<BusinessLogic>(context,listen: true);
+    final _LogLogic = Provider.of<BusinessLogic>(context,listen: true); // eita eikhane sara kaj korbe na
     // final _LogLogic = Provider.of<BusinessLogic>(context,listen: true);
     return Scaffold(
 backgroundColor: AppColors.deep_orange,

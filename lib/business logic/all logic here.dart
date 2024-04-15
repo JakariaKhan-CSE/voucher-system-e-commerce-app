@@ -15,7 +15,7 @@ class BusinessLogic extends ChangeNotifier{
 
   changeSign(){
     secure = !secure;
-    print('Call secure, value: ${secure}');
+    // print('Call secure, value: ${secure}');
     notifyListeners();
   }
   int currentIndex=0;

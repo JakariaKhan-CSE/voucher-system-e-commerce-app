@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_e_commerce/ui/complete_order_animation.dart';
 
 class ProductList extends StatefulWidget {
   final String collectionName;
@@ -170,6 +171,9 @@ print('discount value from checkVoucher function: ${discount}');
                         content: Text('Order confirmed!'),
                         backgroundColor: Colors.green,
                       ));
+                      deleteAllDocumentsInItemsCollection();
+
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OrderSuccessfull(),));
                     },
                     child: const Text('Order Confirm'),
                   ),
@@ -180,6 +184,18 @@ print('discount value from checkVoucher function: ${discount}');
         );
       },
     );
+  }
+  void deleteAllDocumentsInItemsCollection() async {
+    var itemsCollectionRef = FirebaseFirestore.instance
+        .collection(widget.collectionName)
+        .doc(FirebaseAuth.instance.currentUser?.email)
+        .collection('items');
+
+    var snapshots = await itemsCollectionRef.get();
+
+    for (var doc in snapshots.docs) {
+      await doc.reference.delete();
+    }
   }
 
   Future<void> generateVoucher() async {

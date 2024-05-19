@@ -6,7 +6,8 @@ import 'package:flutter_e_commerce/ui/bottom_nav_pages/home.dart';
 import 'package:flutter_e_commerce/ui/bottom_nav_pages/profile.dart';
 import 'package:provider/provider.dart';
 class BottomNavController extends StatefulWidget {
-  const BottomNavController({super.key});
+
+ const BottomNavController({super.key,});
 
   @override
   State<BottomNavController> createState() => _HomePageState();
@@ -18,6 +19,7 @@ class _HomePageState extends State<BottomNavController> {
   @override
   Widget build(BuildContext context) {
     final _logic = Provider.of<BusinessLogic>(context,listen: true);
+
     return Scaffold(
       appBar: AppBar(title: Text("E-Commerce"),centerTitle: true,),
       bottomNavigationBar: BottomNavigationBar(

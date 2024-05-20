@@ -40,7 +40,7 @@ class _HomePageState extends State<BottomNavController> {
           BottomNavigationBarItem(icon: Icon(Icons.favorite_outlined),label: "Favourite",backgroundColor: Colors.white),
           BottomNavigationBarItem(
    icon: badges.Badge(
-    position: badges.BadgePosition.topEnd(top: -10, end: -12),
+    position: badges.BadgePosition.topEnd(top: -17, end: -15),
      badgeContent: Text(_logic.cartItemCount.toString()),
      child: Icon(Icons.add_shopping_cart),
      badgeStyle: badges.BadgeStyle(

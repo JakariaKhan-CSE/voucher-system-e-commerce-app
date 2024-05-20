@@ -4,6 +4,7 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_e_commerce/const/AppColors.dart';
+import 'package:flutter_e_commerce/ui/all_product_show.dart';
 import 'package:flutter_e_commerce/ui/product_details.dart';
 import 'package:flutter_e_commerce/ui/search_screen.dart';
 class Home extends StatefulWidget {
@@ -156,7 +157,9 @@ class _HomeState extends State<Home> {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text('Top Products',style: TextStyle(color: Colors.red),),
-                Text('View all >',style: TextStyle(color: Colors.red))
+                TextButton(onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => AllProductShow(products: _products,),));
+                }, child: Text('View all>>',))
               ],
             ),
           ),

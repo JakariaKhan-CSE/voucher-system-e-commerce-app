@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:flutter_e_commerce/business%20logic/all%20logic%20here.dart';
 import 'package:flutter_e_commerce/ui/bottom_nav_controller.dart';
 import 'package:flutter_e_commerce/ui/bottom_nav_pages/home.dart';
+import 'package:provider/provider.dart';
 
 
 
@@ -23,6 +25,7 @@ class _OrderSuccessfullState extends State<OrderSuccessfull> {
   }
   @override
   Widget build(BuildContext context) {
+    Provider.of<BusinessLogic>(context,listen: true).currentIndex = 0;
     return Scaffold(
       body: Center(
         child: Animate(

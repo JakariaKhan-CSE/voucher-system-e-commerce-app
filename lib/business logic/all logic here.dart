@@ -1,4 +1,5 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,27 @@ class BusinessLogic extends ChangeNotifier{
   final TextEditingController passwordcontroller = TextEditingController();
   bool secure = true;
 
+
+  int cartItemCount = 0;
+
+  BusinessLogic() {
+    // Initialize cart items count stream when the provider is first created.
+    _initCartItemsStream();
+  }
+  void _initCartItemsStream() {
+    String? userEmail = FirebaseAuth.instance.currentUser?.email;
+    if (userEmail != null) {
+      FirebaseFirestore.instance
+          .collection('users-cart-item')
+          .doc(userEmail)
+          .collection('items')
+          .snapshots()
+          .listen((snapshot) {
+        cartItemCount = snapshot.docs.length;
+        notifyListeners();
+      });
+    }
+  }
   changeSign(){
     secure = !secure;
     // print('Call secure, value: ${secure}');

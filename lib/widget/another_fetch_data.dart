@@ -40,11 +40,11 @@ class _ProductListState extends State<ProductList> {
         setState(() {
           hasVoucher = true;
           discount = voucherDoc['discountPercentage'];
-print('discount value from checkVoucher function: ${discount}');
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-            content: Text('Voucher used and discount applied!'),
-            backgroundColor: Colors.green,
-          ));
+
+          // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+          //   content: Text('Voucher used and discount applied!'),
+          //   backgroundColor: Colors.green,
+          // ));
         });
 
       }

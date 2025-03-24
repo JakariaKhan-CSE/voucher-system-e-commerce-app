@@ -34,11 +34,11 @@ class _SearchScreenState extends State<SearchScreen> {
                 builder: (context, snapshot) {
                   if(snapshot.hasError)
                     {
-                      return Center(child: Text('Something went wrong'),);
+                      return const Center(child: Text('Something went wrong'),);
                     }
                   if(snapshot.connectionState == ConnectionState.waiting)
                     {
-                      return Center(
+                      return const Center(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [

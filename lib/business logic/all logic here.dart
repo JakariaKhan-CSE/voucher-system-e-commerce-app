@@ -1,12 +1,10 @@
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 
 import '../ui/bottom_nav_controller.dart';
-import '../ui/user_form.dart';
 
 
 class BusinessLogic extends ChangeNotifier{
@@ -60,7 +58,7 @@ class BusinessLogic extends ChangeNotifier{
       if(authCredential!.uid.isNotEmpty)
       {
 
-        Navigator.pushReplacement(context ,MaterialPageRoute(builder: (_)=>BottomNavController()));
+        Navigator.pushReplacement(context ,MaterialPageRoute(builder: (_)=>const BottomNavController()));
       }
       else{
 
@@ -85,7 +83,7 @@ class BusinessLogic extends ChangeNotifier{
     }
     catch(e)
     {
-      print('Eror Occureed>>> is: ${e}');
+      print('Eror Occureed>>> is: $e');
     }
     notifyListeners();
   }

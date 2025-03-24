@@ -7,7 +7,7 @@ class ProductList extends StatefulWidget {
   final String collectionName;
   final String emptyText;
 
-  ProductList({required this.collectionName, required this.emptyText});
+  const ProductList({super.key, required this.collectionName, required this.emptyText});
 
   @override
   _ProductListState createState() => _ProductListState();
@@ -28,8 +28,8 @@ class _ProductListState extends State<ProductList> {
 
   void checkVoucher() async {
 
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    var currentUser = _auth.currentUser;
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    var currentUser = auth.currentUser;
     if (currentUser != null) {
       DocumentSnapshot voucherDoc = await FirebaseFirestore.instance
           .collection('vouchers')
@@ -71,7 +71,7 @@ class _ProductListState extends State<ProductList> {
           return const Center(child: Text('Something went wrong'));
         }
 
-        if (snapshot.data?.docs.length == 0) {
+        if (snapshot.data?.docs.isEmpty) {
           return Center(
             child: Text(
               widget.emptyText,
@@ -152,12 +152,12 @@ class _ProductListState extends State<ProductList> {
                   //     style:
                   //     const TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
                   //   ),
-                  Text('Total amount: \$${totalAmount}'),
+                  Text('Total amount: \$$totalAmount'),
                   Text(
                     'Discount: \$${(totalAmount - finalAmount.toInt())}',
                     style: const TextStyle(color: Colors.green, fontWeight: FontWeight.bold),
                   ),
-                  Text('Final amount: \$${finalAmount}'),
+                  Text('Final amount: \$$finalAmount'),
                   TextButton(
                     onPressed: () async {
                       if (totalAmount >= 50000) {
@@ -173,7 +173,7 @@ class _ProductListState extends State<ProductList> {
                       ));
                       deleteAllDocumentsInItemsCollection();
 
-                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => OrderSuccessfull(),));
+                      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const OrderSuccessfull(),));
                     },
                     child: const Text('Order Confirm'),
                   ),
@@ -199,15 +199,15 @@ class _ProductListState extends State<ProductList> {
   }
 
   Future<void> generateVoucher() async {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    var currentUser = _auth.currentUser;
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    var currentUser = auth.currentUser;
 
     if (currentUser != null) {
-      CollectionReference _vouchersCollection =
+      CollectionReference vouchersCollection =
       FirebaseFirestore.instance.collection('vouchers');
       String voucherCode = generateRandomVoucherCode();
 
-      await _vouchersCollection.doc(currentUser.email).set({
+      await vouchersCollection.doc(currentUser.email).set({
         "code": voucherCode,
         "discountPercentage": 10,
         "used": false,
@@ -221,8 +221,8 @@ class _ProductListState extends State<ProductList> {
   }
 
   Future<void> useVoucher() async {
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    var currentUser = _auth.currentUser;
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    var currentUser = auth.currentUser;
 
     if (currentUser != null) {
       DocumentReference voucherDoc =

@@ -17,20 +17,20 @@ class ProductDetails extends StatefulWidget {
 
 class _ProductDetailsState extends State<ProductDetails> {
   Future addCart()async{
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    var current_user = _auth.currentUser;
-    CollectionReference _collectionReference  = FirebaseFirestore.instance.collection('users-cart-item');
-    return _collectionReference.doc(current_user!.email).collection('items').doc().set({
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    var currentUser = auth.currentUser;
+    CollectionReference collectionReference  = FirebaseFirestore.instance.collection('users-cart-item');
+    return collectionReference.doc(currentUser!.email).collection('items').doc().set({
           "name":widget.product['product-name'],
           "price":widget.product['product-price'], // change product-price to productPrice
           "image":widget.product['product-image']
     }).then((value) => Fluttertoast.showToast(msg: 'Added to Cart Successfully',backgroundColor: Colors.green));
   }
   Future addFavourite()async{
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    var current_user = _auth.currentUser;
-    CollectionReference _collectionReference  = FirebaseFirestore.instance.collection('users-favourite-item');
-    return _collectionReference.doc(current_user!.email).collection('items').doc().set({
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    var currentUser = auth.currentUser;
+    CollectionReference collectionReference  = FirebaseFirestore.instance.collection('users-favourite-item');
+    return collectionReference.doc(currentUser!.email).collection('items').doc().set({
       "name":widget.product['product-name'],
       "price":widget.product['product-price'], // change product-price to productPrice will error occur
       "image":widget.product['product-image']
@@ -47,7 +47,7 @@ class _ProductDetailsState extends State<ProductDetails> {
             backgroundColor: AppColors.deep_orange,
             child: IconButton(onPressed: (){
               Navigator.pop(context);
-            },icon: Icon(Icons.arrow_back_ios,color: Colors.white,),),
+            },icon: const Icon(Icons.arrow_back_ios,color: Colors.white,),),
           ),
         ),
         actions: [
@@ -57,13 +57,13 @@ class _ProductDetailsState extends State<ProductDetails> {
             builder: (context, snapshot) {
               if(snapshot.data == null)
                 {
-                  return Text("");
+                  return const Text("");
                 }
               return CircleAvatar(
                 backgroundColor: AppColors.deep_orange,
                 child: IconButton(onPressed: (){
-                 snapshot.data?.docs.length==0?addFavourite():Fluttertoast.showToast(msg: 'Already Added Favourite');
-                },icon: snapshot.data?.docs.length==0?Icon(Icons.favorite_border_outlined,color: Colors.white,):Icon(Icons.favorite_outlined)),
+                 snapshot.data?.docs.isEmpty?addFavourite():Fluttertoast.showToast(msg: 'Already Added Favourite');
+                },icon: snapshot.data?.docs.isEmpty?const Icon(Icons.favorite_border_outlined,color: Colors.white,):const Icon(Icons.favorite_outlined)),
               );
             },
 
@@ -96,8 +96,8 @@ class _ProductDetailsState extends State<ProductDetails> {
                     enableInfiniteScroll: true,
                     reverse: false,
                     autoPlay: true,
-                    autoPlayInterval: Duration(seconds: 8), // 8 second por por item change hobe automatically
-                    autoPlayAnimationDuration: Duration(milliseconds: 800),
+                    autoPlayInterval: const Duration(seconds: 8), // 8 second por por item change hobe automatically
+                    autoPlayAnimationDuration: const Duration(milliseconds: 800),
                     autoPlayCurve: Curves.fastOutSlowIn,
                     enlargeCenterPage: true,
                     enlargeFactor: 0.8,
@@ -111,7 +111,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                 ),
               ),
-              SizedBox(height: 10,),
+              const SizedBox(height: 10,),
               Center(
                 child: DotsIndicator(dotsCount: widget.product.length==0?1:widget.product['product-image'].length,
                   position: _dotPosition,
@@ -124,15 +124,15 @@ class _ProductDetailsState extends State<ProductDetails> {
                   ),
                 ),
               ),
-              Text(widget.product['product-name'],style: TextStyle(fontSize: 28,fontWeight: FontWeight.bold),),
-              SizedBox(height: 15,),
-              Text('\$${widget.product['product-price']}',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
-              SizedBox(height: 15,),
+              Text(widget.product['product-name'],style: const TextStyle(fontSize: 28,fontWeight: FontWeight.bold),),
+              const SizedBox(height: 15,),
+              Text('\$${widget.product['product-price']}',style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 18),),
+              const SizedBox(height: 15,),
               Text(widget.product['product-description'],textAlign: TextAlign.justify,),
-              SizedBox(height: 15,),
+              const SizedBox(height: 15,),
               SizedBox(
                 width: double.infinity/1.2,
-                  child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: AppColors.deep_orange,),onPressed: ()=>addCart(), child: Text('Add to Cart',style: TextStyle(color: Colors.white),)))
+                  child: ElevatedButton(style: ElevatedButton.styleFrom(backgroundColor: AppColors.deep_orange,),onPressed: ()=>addCart(), child: const Text('Add to Cart',style: TextStyle(color: Colors.white),)))
             ],
           ),
         ),

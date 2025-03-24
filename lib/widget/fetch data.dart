@@ -10,17 +10,17 @@ Widget fetchProduct(collectionName,String emptyText){
   return StreamBuilder(
     stream: FirebaseFirestore.instance.collection(collectionName).doc(FirebaseAuth.instance.currentUser?.email).collection('items').snapshots(),
     builder: (context, snapshot) {
-      if(snapshot.data?.docs.length == 0)
+      if(snapshot.data?.docs.isEmpty)
       {
         return Center(child: Text(emptyText,style: Theme.of(context).textTheme.titleLarge,));
       }
       if(snapshot.hasError)
       {
-        return Center(child: Text('Something went wrong'),);
+        return const Center(child: Text('Something went wrong'),);
       }
       if(snapshot.connectionState==ConnectionState.waiting)
       {
-        return Center(child: CircularProgressIndicator(),);
+        return const Center(child: CircularProgressIndicator(),);
       }
       // Calculate total amount
       totalamount = 0;
@@ -43,11 +43,11 @@ Widget fetchProduct(collectionName,String emptyText){
                 trailing: FittedBox(
                   child: Row(
                     children: [
-                      Text('\$${documentSnapshot['price'].toString()}',style: TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: Colors.deepOrange),),
-                      SizedBox(width: 10,),
+                      Text('\$${documentSnapshot['price'].toString()}',style: const TextStyle(fontWeight: FontWeight.bold,fontSize: 15,color: Colors.deepOrange),),
+                      const SizedBox(width: 10,),
                       IconButton(onPressed: (){
                         FirebaseFirestore.instance.collection(collectionName).doc(FirebaseAuth.instance.currentUser?.email).collection('items').doc(documentSnapshot.id).delete();
-                      }, icon: Icon(Icons.delete,color: Colors.red,))
+                      }, icon: const Icon(Icons.delete,color: Colors.red,))
                     ],
                   ),
                 ),
@@ -64,14 +64,14 @@ Widget fetchProduct(collectionName,String emptyText){
 }
 
 void generateVoucher() async {
-  final FirebaseAuth _auth = FirebaseAuth.instance;
-  var currentUser = _auth.currentUser;
+  final FirebaseAuth auth = FirebaseAuth.instance;
+  var currentUser = auth.currentUser;
 
   if (currentUser != null) {
-    CollectionReference _vouchersCollection = FirebaseFirestore.instance.collection('vouchers');
+    CollectionReference vouchersCollection = FirebaseFirestore.instance.collection('vouchers');
     String voucherCode = generateRandomVoucherCode();
 
-    await _vouchersCollection.doc(currentUser.email).set({
+    await vouchersCollection.doc(currentUser.email).set({
       "code": voucherCode,
       "discountPercentage": 10,
       "used": false,

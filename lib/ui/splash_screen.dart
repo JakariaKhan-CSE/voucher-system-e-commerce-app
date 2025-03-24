@@ -3,7 +3,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_e_commerce/const/AppColors.dart';
 import 'package:flutter_e_commerce/ui/login_Screen.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 
 class SplashScreen extends StatefulWidget {
@@ -17,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     // TODO: implement initState
-    Timer(Duration(seconds: 3), ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx)=>LoginScreen())));
+    Timer(const Duration(seconds: 3), ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (ctx)=>const LoginScreen())));
     super.initState();
 
 

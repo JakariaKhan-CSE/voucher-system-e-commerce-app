@@ -35,17 +35,17 @@ class _UserFormState extends State<UserForm> {
   }
 
   sendUserDataDB()async{
-    final FirebaseAuth _auth = FirebaseAuth.instance;
-    var currentUser = _auth.currentUser;
+    final FirebaseAuth auth = FirebaseAuth.instance;
+    var currentUser = auth.currentUser;
 
-    CollectionReference _collectionReference = FirebaseFirestore.instance.collection("users-form-data");
-   return _collectionReference.doc(currentUser?.email).set({
+    CollectionReference collectionReference = FirebaseFirestore.instance.collection("users-form-data");
+   return collectionReference.doc(currentUser?.email).set({
      "name": _nameController.text,
      "phone": _phoneController.text,
      "dob": _dobController.text,
      "gender": _genderController.text,
      "age": _ageController.text,
-   }).then((value) => Navigator.push(context, MaterialPageRoute(builder: (_)=>BottomNavController()))).catchError((error)=>print("error is ${error}"));
+   }).then((value) => Navigator.push(context, MaterialPageRoute(builder: (_)=>const BottomNavController()))).catchError((error)=>print("error is $error"));
   }
   @override
   Widget build(BuildContext context) {
@@ -57,23 +57,23 @@ class _UserFormState extends State<UserForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              SizedBox(height: 50,),
-              Text("Submit the form to Continue",style: TextStyle(color: Colors.red, fontSize: 22,fontWeight: FontWeight.bold),),
-              Text("We will not share your information with anyone.",style: TextStyle(color: Colors.grey),),
-              SizedBox(height: 40,),
+              const SizedBox(height: 50,),
+              const Text("Submit the form to Continue",style: TextStyle(color: Colors.red, fontSize: 22,fontWeight: FontWeight.bold),),
+              const Text("We will not share your information with anyone.",style: TextStyle(color: Colors.grey),),
+              const SizedBox(height: 40,),
               myTextField("Full Name", _nameController),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               myTextField("Phone Number", _phoneController),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               TextFormField(
                 controller: _dobController,
                 readOnly: true,
                 decoration: InputDecoration(
                   hintText: "Date of Birth",
-                  suffixIcon: IconButton(onPressed: ()=>_selectDateFromPicker(context),icon: Icon(Icons.calendar_month),)
+                  suffixIcon: IconButton(onPressed: ()=>_selectDateFromPicker(context),icon: const Icon(Icons.calendar_month),)
                 ),
               ),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               TextFormField(
                 controller: _genderController,
                 readOnly: true,
@@ -83,7 +83,7 @@ class _UserFormState extends State<UserForm> {
                     items: gender.map((e) {
                       return DropdownMenuItem(
                         value: e,
-                        child: new Text(e),
+                        child: Text(e),
                       onTap: (){
                         setState(() {
                           _genderController.text = e;
@@ -97,9 +97,9 @@ class _UserFormState extends State<UserForm> {
                   )
                 ),
               ),
-              SizedBox(height: 20,),
+              const SizedBox(height: 20,),
               myTextField("Age", _ageController),
-              SizedBox(height: 50,),
+              const SizedBox(height: 50,),
 
              CustomButton('Continue', ()=>sendUserDataDB(), context)
               

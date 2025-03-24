@@ -1,7 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_e_commerce/business%20logic/all%20logic%20here.dart';
-import 'package:flutter_e_commerce/ui/registration_screen.dart';
 import 'package:flutter_e_commerce/ui/splash_screen.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -15,7 +14,7 @@ void main() {
     ChangeNotifierProvider(create: (context) => BusinessLogic(),),
     ChangeNotifierProvider(create: (context) => RegistrationLogic(),),
 
-  ],child: HomePage(),));
+  ],child: const HomePage(),));
 }
 
 class HomePage extends StatefulWidget {
@@ -29,7 +28,7 @@ class _HomePageState extends State<HomePage> {
   Future<void> _loadDatabase() async {
     try {
       await Firebase.initializeApp(
-          options: FirebaseOptions(
+          options: const FirebaseOptions(
               apiKey: 'AIzaSyBc7QN_iVe0grfnmqMGIsOBNzDZ08ZeKLM',
               appId: '1:490949449968:android:63607109946c950f148a35',
               messagingSenderId: '490949449968',
@@ -37,7 +36,7 @@ class _HomePageState extends State<HomePage> {
 
       );
     } catch (e) {
-      print("${e} Error Occured!!! Not Connect firebase");
+      print("$e Error Occured!!! Not Connect firebase");
     }
   }
 
@@ -56,7 +55,7 @@ class _HomePageState extends State<HomePage> {
         return MaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(primarySwatch: Colors.blue),
-          home: SplashScreen(),
+          home: const SplashScreen(),
         );
       },
     );

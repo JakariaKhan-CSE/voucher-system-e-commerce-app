@@ -22,40 +22,40 @@ class _HomePageState extends State<BottomNavController> {
 
   @override
   Widget build(BuildContext context) {
-    final _logic = Provider.of<BusinessLogic>(context,listen: true);
+    final logic = Provider.of<BusinessLogic>(context,listen: true);
 
     return Scaffold(
-      appBar: AppBar(title: Text("E-Commerce"),centerTitle: true,),
+      appBar: AppBar(title: const Text("E-Commerce"),centerTitle: true,),
       bottomNavigationBar: BottomNavigationBar(
-        currentIndex: _logic.currentIndex,
+        currentIndex: logic.currentIndex,
         elevation: 5,
         selectedItemColor: Colors.deepOrange,
         unselectedItemColor: Colors.grey,
-        selectedLabelStyle: TextStyle(
+        selectedLabelStyle: const TextStyle(
           fontWeight: FontWeight.bold,
           color: Colors.black
         ),
         items: [
-          BottomNavigationBarItem(icon: Icon(Icons.home),label: "Home",backgroundColor: Colors.white),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite_outlined),label: "Favourite",backgroundColor: Colors.white),
+          const BottomNavigationBarItem(icon: Icon(Icons.home),label: "Home",backgroundColor: Colors.white),
+          const BottomNavigationBarItem(icon: Icon(Icons.favorite_outlined),label: "Favourite",backgroundColor: Colors.white),
           BottomNavigationBarItem(
    icon: badges.Badge(
     position: badges.BadgePosition.topEnd(top: -17, end: -15),
-     badgeContent: Text(_logic.cartItemCount.toString()),
-     child: Icon(Icons.add_shopping_cart),
-     badgeStyle: badges.BadgeStyle(
+     badgeContent: Text(logic.cartItemCount.toString()),
+     badgeStyle: const badges.BadgeStyle(
        badgeColor: Colors.blue
      ),
+     child: const Icon(Icons.add_shopping_cart),
    ),
               // icon: Icon(Icons.add_shopping_cart),
               label: "Cart",backgroundColor: Colors.white),
-          BottomNavigationBarItem(icon: Icon(Icons.person),label: "Person",backgroundColor: Colors.white),
+          const BottomNavigationBarItem(icon: Icon(Icons.person),label: "Person",backgroundColor: Colors.white),
         ],
         onTap: (index){
-          _logic.changeIndex(index);
+          logic.changeIndex(index);
         },
       ),
-      body: _pages[_logic.currentIndex],
+      body: _pages[logic.currentIndex],
     );
   }
 }

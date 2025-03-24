@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_e_commerce/main.dart';
 import 'package:flutter_e_commerce/ui/bottom_nav_controller.dart';
-import 'package:flutter_e_commerce/ui/bottom_nav_pages/home.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 class Profile extends StatefulWidget {
   const Profile({super.key});
@@ -24,32 +22,32 @@ class _ProfileState extends State<Profile> {
         TextFormField(
           controller: _nameController =TextEditingController(text: data['name']),
         ),
-        SizedBox(height: 15,),
+        const SizedBox(height: 15,),
         TextFormField(
           controller: _phoneController = TextEditingController(text: data['phone']),
         ),
-        SizedBox(height: 15,),
+        const SizedBox(height: 15,),
         TextFormField(
           controller: _ageController = TextEditingController(text: data['age']),
         ),
-        SizedBox(height: 25,),
+        const SizedBox(height: 25,),
         ElevatedButton(onPressed: (){
           updateData();
-          Navigator.push(context, MaterialPageRoute(builder: (context) => BottomNavController(),));
-        }, child: Text('Update Data'))
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const BottomNavController(),));
+        }, child: const Text('Update Data'))
       ],
     );
   }
 
   updateData(){
-      CollectionReference _collectionReference = FirebaseFirestore.instance.collection('users-form-data');
+      CollectionReference collectionReference = FirebaseFirestore.instance.collection('users-form-data');
       var name = _nameController?.text.trim();
       var phone = _phoneController?.text.trim();
       var age = _ageController?.text.trim();
       _nameController?.clear();
       _phoneController?.clear();
       _ageController?.clear();
-      return _collectionReference.doc(FirebaseAuth.instance.currentUser!.email).update({
+      return collectionReference.doc(FirebaseAuth.instance.currentUser!.email).update({
         'name':name,
         'phone': phone,
         'age': age,
@@ -68,7 +66,7 @@ class _ProfileState extends State<Profile> {
                 var data = snapshot.data;
                 if(data == null)
                   {
-                    return Center(child: CircularProgressIndicator(),); // avoid short time error for fetch data from firestore
+                    return const Center(child: CircularProgressIndicator(),); // avoid short time error for fetch data from firestore
                   }
                 return setDataToTextField(data);
               },

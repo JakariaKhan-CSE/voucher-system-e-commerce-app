@@ -11,7 +11,7 @@ class RegistrationLogic extends ChangeNotifier{
 
   changeSign(){
     secure = !secure;
-    print('Call secure, value: ${secure}');
+    print('Call secure, value: $secure');
     notifyListeners();
   }
   Future<void> signUp(BuildContext context)async{
@@ -29,7 +29,7 @@ class RegistrationLogic extends ChangeNotifier{
       if(authCredential!.uid.isNotEmpty)
       {
 
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>UserForm()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (_)=>const UserForm()));
       }
       else{
         Fluttertoast.showToast(msg: "Something is wrong");

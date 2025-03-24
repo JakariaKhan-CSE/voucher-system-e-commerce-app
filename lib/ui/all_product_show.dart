@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_e_commerce/ui/product_details.dart';
 
 class AllProductShow extends StatelessWidget {
   final List products;
-  AllProductShow({super.key, required this.products});
+  const AllProductShow({super.key, required this.products});
 
 
   @override

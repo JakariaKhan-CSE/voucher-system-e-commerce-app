@@ -62,8 +62,8 @@ class _ProductDetailsState extends State<ProductDetails> {
               return CircleAvatar(
                 backgroundColor: AppColors.deep_orange,
                 child: IconButton(onPressed: (){
-                 snapshot.data?.docs.isEmpty?addFavourite():Fluttertoast.showToast(msg: 'Already Added Favourite');
-                },icon: snapshot.data?.docs.isEmpty?const Icon(Icons.favorite_border_outlined,color: Colors.white,):const Icon(Icons.favorite_outlined)),
+                 snapshot.data!.docs.isEmpty?addFavourite():Fluttertoast.showToast(msg: 'Already Added Favourite');
+                },icon: snapshot.data!.docs.isEmpty?const Icon(Icons.favorite_border_outlined,color: Colors.white,):const Icon(Icons.favorite_outlined)),
               );
             },
 

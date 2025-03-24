@@ -71,7 +71,7 @@ class _ProductListState extends State<ProductList> {
           return const Center(child: Text('Something went wrong'));
         }
 
-        if (snapshot.data?.docs.isEmpty) {
+        if (snapshot.data!.docs.isEmpty) {
           return Center(
             child: Text(
               widget.emptyText,

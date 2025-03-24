@@ -10,7 +10,7 @@ Widget fetchProduct(collectionName,String emptyText){
   return StreamBuilder(
     stream: FirebaseFirestore.instance.collection(collectionName).doc(FirebaseAuth.instance.currentUser?.email).collection('items').snapshots(),
     builder: (context, snapshot) {
-      if(snapshot.data?.docs.isEmpty)
+      if(snapshot.data!.docs.isEmpty)
       {
         return Center(child: Text(emptyText,style: Theme.of(context).textTheme.titleLarge,));
       }
